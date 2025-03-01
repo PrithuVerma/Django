@@ -1,0 +1,28 @@
+{% extends 'myapp/base.html' %}
+
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div style="background-color: darkslategray;" class="card-header text-white text-center">
+                    <h4>Edit Your Task</h4>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Form starts here -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <input style="border-radius: 10px;" class="btn btn-primary btn-lg" type="submit" value="Edit Task">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

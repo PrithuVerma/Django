@@ -1,0 +1,54 @@
+{% extends 'myapp/base.html' %}
+{% block body %}
+
+<div class="containet-fluid" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>ToDo</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="Add" style="text-align: center;">Add Task</h4> <!-- Centered the text -->
+            <form class="p-3 shadow" method="POST" style="width: 80%; margin: 0 auto;"> <!-- Centered form and adjusted width -->
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Enter Task" style="width: 100%;">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="date" name="date" id="date" style="width: 100%;">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="priority" id="priority" placeholder="Enter Priority" style="width: 100%;">
+                </div>
+                <input class="btn btn-success" type="submit" style="width: 100%;">
+            </form>
+        </div>
+        
+        <div class="col-md-6">
+            <h4>Tasks to be completed</h4>
+            {% for task in task_list %}
+            <div class="shadow card" style="position: relative;width: 500px;">
+                <div class="card-body">
+                    <h5 class="card-title">Task: {{task.name}}</h5> 
+                    <p><b>Priority: {{task.priority}}</b> </p>
+                    <p><b>{{task.date}}</b></p>
+                    <a style="border-radius: 10px;" class="btn btn-danger" href="{% url 'delete' task.id %}">Done</a>
+                    <a style="border-radius: 10px;" class="btn btn-primary" href="{% url 'edit' task.id %}">Edit</a>
+                    <span class="task-id" style="position: absolute; top: 10px; right: 15px; font-weight: bold;">
+                        ID: {{task.id}}
+                    </span>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
